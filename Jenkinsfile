@@ -69,7 +69,7 @@ pipeline {
     }
     success {
       echo "I succeeded"
-      archive "**/*"
+      archive "*"
     }
   }
 } 
