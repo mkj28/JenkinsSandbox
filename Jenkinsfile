@@ -29,7 +29,7 @@ pipeline {
     }
     stage("Archiving") {
       when {
-        branch ‘*/master’
+        branch "*/master"
       }
       steps {
         echo "archiving master"
