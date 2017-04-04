@@ -2,6 +2,16 @@ pipeline {
   agent any
 
   stages {
+    stage("Build") {
+      steps {
+        echo "building"
+        script {
+          if ("sky" == "blue") {
+            echo "You can\'t actually do loops or if statements etc in Declarative unless you\'re in a script block!"
+          }
+        }
+      }
+    }
     stage("Testing") {
       steps {
         parallel(
@@ -16,6 +26,14 @@ pipeline {
           }
         )
       }
+    }
+    stage("Archiving") {
+      when {
+        branch ‘*/master’
+      }
+      steps {
+        echo "archiving master"
+        }
     }
   }
 }
