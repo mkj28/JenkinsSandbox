@@ -3,21 +3,12 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        parallel(
-          "Build": {
-            echo 'building'
-            script {
-              if ("sky" == "blue") {
-                echo "You can't actually do loops or if statements etc in Declarative unless you're in a script block!"
-              }
-            }
-            
-            
-          },
-          "parallel build": {
-            sleep 5
+        echo 'building'
+        script {
+          if ("sky" == "blue") {
+            echo "You can't actually do loops or if statements etc in Declarative unless you're in a script block!"
           }
-        )
+        }
       }
     }
     stage('Testing') {
@@ -31,7 +22,9 @@ pipeline {
           },
           "testingIE11": {
             echo 'testing IE11'
-            
+          },
+          "testing another browser": {
+            sleep 5
           }
         )
       }
@@ -77,7 +70,6 @@ pipeline {
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
-    skipDefaultCheckout()
     timestamps()
     timeout(time: 5, unit: 'MINUTES')
   }
