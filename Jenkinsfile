@@ -16,7 +16,6 @@ pipeline {
           },
           "parallel build": {
             sleep 5
-            
           }
         )
       }
@@ -26,11 +25,9 @@ pipeline {
         parallel(
           "testingChrome": {
             echo 'testing chrome'
-            retry(count: 5) {
+            retry(5) {
               echo 'Keep trying this if it fails up to 5 times'
             }
-            
-            
           },
           "testingIE11": {
             echo 'testing IE11'
@@ -79,7 +76,7 @@ pipeline {
     
   }
   options {
-    buildDiscarder(logRotator(numToKeepStr: '1'))
+    buildDiscarder(logRotator(numToKeepStr: '10'))
     skipDefaultCheckout()
     timestamps()
     timeout(time: 5, unit: 'MINUTES')
