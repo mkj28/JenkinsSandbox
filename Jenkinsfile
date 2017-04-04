@@ -30,7 +30,7 @@ pipeline {
         echo "building"
         script {
           if ("sky" == "blue") {
-            echo "You can\'t actually do loops or if statements etc in Declarative unless you\'re in a script block!"
+            echo "You can't actually do loops or if statements etc in Declarative unless you're in a script block!"
           }
         }
       }
@@ -50,12 +50,17 @@ pipeline {
         )
       }
     }
-    stage("Archiving") {
+    stage("Archiving - master only") {
       when {
         branch "*/master"
       }
       steps {
         echo "archiving master"
+        }
+    }
+    stage("Archiving") {
+      steps {
+        echo "archiving"
         }
     }
   }
@@ -64,7 +69,7 @@ pipeline {
       echo "always running this post"
     }
     changed {
-      echo "I\'m different"
+      echo "I'm different"
     }
     success {
       echo "I succeeded"
