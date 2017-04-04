@@ -7,7 +7,7 @@ pipeline {
   }
 
   tools {
-    node "NodeJS 7.8.0"
+    nodejs "NodeJS 7.8.0"
   }
 
   options {
