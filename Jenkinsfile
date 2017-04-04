@@ -60,5 +60,16 @@ pipeline {
         }
     }
   }
+  post {
+    always {
+      echo "always running this post"
+    }
+    changed {
+      echo "I'm different"
+    }
+    success {
+      echo "I succeeded"
+      archive "*"
+    }
+  }
 }
-
