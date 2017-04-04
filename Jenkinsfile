@@ -4,7 +4,6 @@ pipeline {
   environment {
     FOO = "bar"
     OTHER = "${FOO}baz"
-    SOME_CREDENTIALS = credentials('some-id')
   }
 
   tools {
@@ -31,7 +30,7 @@ pipeline {
         echo "building"
         script {
           if ("sky" == "blue") {
-            echo "You can't actually do loops or if statements etc in Declarative unless you're in a script block!"
+            echo "You can\'t actually do loops or if statements etc in Declarative unless you\'re in a script block!"
           }
         }
       }
@@ -65,7 +64,7 @@ pipeline {
       echo "always running this post"
     }
     changed {
-      echo "I'm different"
+      echo "I\'m different"
     }
     success {
       echo "I succeeded"
