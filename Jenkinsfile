@@ -2,80 +2,38 @@ pipeline {
   agent any
   
   parameters {
-    choice(choices: 'Retail\nTravel\nHotel\nFinancial\nCommunication\n', description: 'Specify Dataset', name: 'dataset')
-    choice(choices: 'Eric Middleton: 4151234567\nMichael McCarron: 4151234566\n', description: 'Phone Number', name: 'phoneNumber')
+    booleanParam(defaultValue: true, description: 'Run stage1?', name: 'stage1')
+    booleanParam(defaultValue: true, description: 'Run stage2?', name: 'stage2')
+    booleanParam(defaultValue: true, description: 'Run stage3?', name: 'stage3')
   }
 
   stages {
-    stage('Resetting demo') {
-      steps {
-        echo "demo: ${params.dataset}"
-        echo "demo: ${params.phoneNumber}"
-        echo 'building'
-        script {
-          if ("sky" == "blue") {
-            echo "You can't actually do loops or if statements etc in Declarative unless you're in a script block!"
-          }
-        }
-      }
-    }
-    stage('Testing') {
-      steps {
-        parallel(
-          "testingChrome": {
-            echo 'testing chrome'
-            retry(5) {
-              echo 'Keep trying this if it fails up to 5 times'
-            }
-          },
-          "testingIE11": {
-            echo 'testing IE11'
-          },
-          "testing another browser": {
-            sleep 5
-          }
-        )
-      }
-    }
-    stage('Archiving - master only') {
+    stage('Stage 1') {
       when {
-        branch "master"
+        expression { params.stage1 }
       }
       steps {
-        echo 'archiving master'
+        echo "Running stage 1"
       }
     }
-    stage('Archiving') {
+    stage('Stage 2') {
+      when {
+        expression { params.stage2 }
+      }
       steps {
-        echo 'archiving'
+        echo "Running stage 2"
+      }
+    }
+    stage('Stage 3') {
+      when {
+        expression { params.stage3 }
+      }
+      steps {
+        echo "Running stage 3"
       }
     }
   }
-  tools {
-    nodejs 'NodeJS 7.8.0'
-  }
-  environment {
-    FOO = 'bar'
-    OTHER = '${FOO}baz'
-  }
-  post {
-    always {
-      echo 'always running this post'
-      
-    }
-    
-    changed {
-      echo 'I\'m different'
-      
-    }
-    
-    success {
-      echo 'I succeeded'
-      archive '*'
-      
-    }
-    
-  }
+
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
     timestamps()
