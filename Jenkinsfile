@@ -1,16 +1,10 @@
 pipeline {
   agent any
-  
-  parameters {
-    booleanParam(defaultValue: true, description: 'Run stage1?', name: 'stage1')
-    booleanParam(defaultValue: true, description: 'Run stage2?', name: 'stage2')
-    booleanParam(defaultValue: true, description: 'Run stage3?', name: 'stage3')
-  }
-
+    
   stages {
     stage('Run stage 1?') {
       steps {
-        input('OK to continue?')
+        input message: 'Select if you want to run stage 1. Abort will abort everything.', parameters: [booleanParam(defaultValue: true, description: 'Run stage1?', name: 'stage1')]
       }
     }
     stage('Stage 1') {
@@ -21,12 +15,22 @@ pipeline {
         echo "Running stage 1"
       }
     }
+    stage('Run stage 2?') {
+      steps {
+        input message: 'Select if you want to run stage 2. Abort will abort everything.', parameters: [booleanParam(defaultValue: true, description: 'Run stage2?', name: 'stage2')]
+      }
+    }
     stage('Stage 2') {
       when {
         expression { params.stage2 }
       }
       steps {
         echo "Running stage 2"
+      }
+    }
+    stage('Run stage 3?') {
+      steps {
+        input message: 'Select if you want to run stage 3. Abort will abort everything.', parameters: [booleanParam(defaultValue: true, description: 'Run stage3?', name: 'stage3')]
       }
     }
     stage('Stage 3') {
