@@ -11,7 +11,7 @@ pipeline {
     }
     stage('Stage 1') {
       when {
-        expression { stage1['stage1'] }
+        expression { stage1 }
       }
       steps {
         echo "Running stage 1"
@@ -26,7 +26,7 @@ pipeline {
     }
     stage('Stage 2') {
       when {
-        expression { stage2['stage2'] }
+        expression { stage2 }
       }
       steps {
         echo "Running stage 2"
@@ -41,7 +41,7 @@ pipeline {
     }
     stage('Stage 3') {
       when {
-        expression { stage3['stage3'] }
+        expression { stage3 }
       }
       steps {
         echo "Running stage 3"
