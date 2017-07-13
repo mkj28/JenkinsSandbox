@@ -8,6 +8,11 @@ pipeline {
   }
 
   stages {
+    stage('Run stage 1?') {
+      steps {
+        input('OK to continue?')
+      }
+    }
     stage('Stage 1') {
       when {
         expression { params.stage1 }
