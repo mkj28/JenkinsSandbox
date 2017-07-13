@@ -4,7 +4,9 @@ pipeline {
   stages {
     stage('Run stage 1?') {
       steps {
-        stage1 = input message: 'Select if you want to run stage 1. Abort will abort everything.', parameters: [booleanParam(defaultValue: true, description: 'Run stage1?', name: 'stage1')]
+        script {
+          stage1 = input message: 'Select if you want to run stage 1. Abort will abort everything.', parameters: [booleanParam(defaultValue: true, description: 'Run stage1?', name: 'stage1')]
+        }
       }
     }
     stage('Stage 1') {
@@ -17,7 +19,9 @@ pipeline {
     }
     stage('Run stage 2?') {
       steps {
-        stage2 = input message: 'Select if you want to run stage 2. Abort will abort everything.', parameters: [booleanParam(defaultValue: true, description: 'Run stage2?', name: 'stage2')]
+        script {
+          stage2 = input message: 'Select if you want to run stage 2. Abort will abort everything.', parameters: [booleanParam(defaultValue: true, description: 'Run stage2?', name: 'stage2')]
+        }
       }
     }
     stage('Stage 2') {
@@ -30,7 +34,9 @@ pipeline {
     }
     stage('Run stage 3?') {
       steps {
-        stage3 = input message: 'Select if you want to run stage 3. Abort will abort everything.', parameters: [booleanParam(defaultValue: true, description: 'Run stage3?', name: 'stage3')]
+        script {
+          stage3 = input message: 'Select if you want to run stage 3. Abort will abort everything.', parameters: [booleanParam(defaultValue: true, description: 'Run stage3?', name: 'stage3')]
+        }
       }
     }
     stage('Stage 3') {
